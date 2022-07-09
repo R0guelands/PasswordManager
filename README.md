@@ -6,9 +6,9 @@ Once you have logged in, you can use the `/passwords` endpoint to manage your pa
 
 To install and use it yourself, you can follow this steps:
 
-1. Clone the repository
-2. Install the dependencies with `npm install`
-3. Install and configure the mongodb database (please follow the [instructions](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/))
+1. Clone the repository and go the directory where it got cloned.
+2. Install the dependencies with `npm install`.
+3. Install and configure the mongodb database (please follow the [instructions](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)).
 4. Open the `app.js` file and change the database connection string to your mongodb connection string.
 5. Change the app.listen() call to your desired port and ip.
 6. Run the server with `node app.js`

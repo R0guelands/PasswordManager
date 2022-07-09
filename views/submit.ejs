@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+
+  <div class="row justify-content-center centered">
+    <div class="col-md-6 ">
+      <div class="card box">
+        <div class="card-body">
+          <i class="fas fa-key fa-6x"></i>
+          <h1 class="card-title">Add password</h1>
+
+          <div class="text-start space">
+            <form name="myform" action="/submit" method="POST">
+              <div class="form-group">
+                <label for="name">Name for the password</label>
+                <input type="text" class="form-control" name="name">
+              </div>
+              <div class="form-group space">
+                <label for="login">Username</label>
+                <input type="text" class="form-control" name="login">
+              </div>
+              <div class="form-group space">
+                <label for="password">Password</label>
+                <input id="password" type="password" class="form-control" name="password" required>
+                <input type="checkbox" id="toggle-password" />
+                <label for="toggle-password">Show Password</label>
+              </div>
+              <button type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
+              <a href="/passwords" class="btn btn-danger" style="margin-top:27px">Cancel</a>
+              <button type="button" class="btn btn-secondary" onClick="randomPassword(18);" style="margin-top:27px">Generate random</button>
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<%- include('partials/footer') %>
