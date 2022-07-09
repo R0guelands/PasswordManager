@@ -15,7 +15,7 @@
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input id="password" type="password" class="form-control" name="password" required>
+              <input id="password" type="password" class="form-control" name="password" onkeyup="saveLogin()" required>
               <input type="checkbox" id="toggle-password"/>
               <label for="toggle-password">Show Password</label>
             </div>
@@ -26,8 +26,10 @@
       </div>
     </div>
 
-
   </div>
 </div>
 
-<%- include('partials/footer') %>
+<script src="scripts/localpass.js"></script>
+
+</body>
+</html>

@@ -5,10 +5,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session');
+const sessions = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
-const CryptoJS = require('crypto-js');
 
 // Configuring the app
 app.use(express.static(__dirname + '/public/'));
@@ -20,10 +19,10 @@ for (var x = 0; x < 20; x++) {
     var i = Math.floor(Math.random() * chars.length);
     pass += chars.charAt(i);
 }
-app.use(session({
+app.use(sessions({
     secret: pass,	
     resave: false,				
-    saveUninitialized: false		
+    saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,13 +37,9 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model('User', userSchema);
 passport.use(User.createStrategy());
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-var user = new User({
-    username: 'default',
-    password: 'default'
-});
 
 // Schema for passwords
 const passwordSchema = new mongoose.Schema({
@@ -56,16 +51,6 @@ const passwordSchema = new mongoose.Schema({
 });
 
 const Password = new mongoose.model('Password', passwordSchema);
-
-function encrypt(key, text) {
-    return CryptoJS.AES.encrypt(text, key).toString();
- }
- 
- // Decrypting text
- function decrypt(key, criptedText) {
-    const bytes  = CryptoJS.AES.decrypt(criptedText, key);
-    return bytes.toString(CryptoJS.enc.Utf8);
- }
 
 // app routes
 app.get('/', (req, res) => {
@@ -82,14 +67,11 @@ app.get('/register', (req, res) => {
 
 app.get('/passwords', (req, res) => {
     if (req.isAuthenticated()) {
-        Password.find({"username": user.username}, (err, entries) => {
+        Password.find({"username": req.session.passport.user}, (err, entries) => {
             if (err) {
                 console.log(err);
                 res.redirect('/');
             } else {
-                for (let i = 0; i < entries.length; i++) {
-                    entries[i].password = decrypt(user.password, entries[i].password);
-                }
                 res.render('passwords', 
                     {
                         entries: entries
@@ -142,7 +124,6 @@ app.get('/edit/:id', (req, res) => {
                 console.log(err);
                 res.redirect('/');
             }
-            entry.password = decrypt(user.password, entry.password);
             res.render('edit', {
                 entry: entry
             });
@@ -158,7 +139,7 @@ app.post('/edit/:id', (req, res) => {
             $set: { 
                 name: req.body.name,
                 login: req.body.login,
-                password: encrypt(user.password, req.body.password)
+                password: req.body.passwordCripted
             }
         }, (err) => {
             if (err) {
@@ -176,15 +157,19 @@ app.post('/edit/:id', (req, res) => {
 
 app.post('/login', (req, res) => {
 
-    user.username = req.body.username;
-    user.password = req.body.password;
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
 
     req.login(user, (err) => {
         if (err) {
             console.log(err);
             res.redirect('/login');
         } else {
-            passport.authenticate('local', { successRedirect: '/passwords', failureRedirect: '/login' })(req, res);
+            passport.authenticate('local', { failureRedirect: '/login' })(req, res, () => {
+                res.redirect('/passwords');
+            });
         }
     }
     );
@@ -193,29 +178,25 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-    user.username = req.body.username;
-    user.password = req.body.password;
-
     User.register({ username: req.body.username}, req.body.password, (err, user) => {
         if (err) {
             console.log(err);
             res.redirect('/register');
         } else {
-            passport.authenticate('local', { successRedirect: '/passwords', failureRedirect: '/register' })(req, res);
+            res.redirect('/login');
         }
     });
 
 });
 
 app.post('/submit', (req, res) => {
-
     if (req.isAuthenticated()) {
         const newPassword = new Password({
-            username: user.username,
+            username: req.session.passport.user,
             login: req.body.login,
             date_of_creation: req.body.date,
             name: req.body.name,
-            password: encrypt(user.password, req.body.password)
+            password: req.body.passwordCripted
         });
         newPassword.save();
         res.redirect('/passwords');

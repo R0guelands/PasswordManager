@@ -21,13 +21,14 @@
               </div>
               <div class="form-group space">
                 <label for="password">Password</label>
-                <input id="password" type="password" class="form-control" name="password" value="<%=entry.password%>">
+                <input id="password" type="password" class="form-control" name="password" required>
+                <input type="hidden" name="passwordCripted" id="passwordCripted">
                 <input type="checkbox" id="toggle-password" />
                 <label for="toggle-password">Show Password</label>
               </div>
               <button type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
               <a href="/passwords" class="btn btn-danger" style="margin-top:27px">Cancel</a>
-              <button type="button" class="btn btn-secondary" onClick="randomPassword(18);" style="margin-top:27px">Generate random</button>
+              <button type="button" class="btn btn-secondary" id="randomTextGenerator" style="margin-top:27px">Generate random</button>
             </form>
           </div>
 
@@ -39,7 +40,7 @@
   </div>
 </div>
 
-<script src="/scripts/index.js"></script>
+<script src="/scripts/encrypt.js"></script>
 
 </body>
 </html>
