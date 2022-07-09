@@ -14,8 +14,14 @@ const CryptoJS = require('crypto-js');
 app.use(express.static(__dirname + '/public/'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+var chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+var pass = "";
+for (var x = 0; x < length; x++) {
+    var i = Math.floor(Math.random() * chars.length);
+    pass += chars.charAt(i);
+}
 app.use(session({
-    secret: process.env.SECRET,	
+    secret: pass,	
     resave: false,				
     saveUninitialized: false		
 }));
