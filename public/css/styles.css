@@ -26,4 +26,26 @@ body {
   }
 }
 
+.table-sortable th {
+  cursor: pointer;
+}
 
+.table-sortable .th-sort-asc::after {
+  content: '▲';
+}
+
+.table-sortable .th-sort-desc::after {
+  content: '▼';
+}
+
+.table-sortable .th-sort-asc::after,
+.table-sortable .th-sort-desc::after {
+  margin-left: 5px;
+  font-size: 0.8rem;
+  color: rgb(211, 63, 63);
+}
+
+.table-sortable .th-sort-asc,
+.table-sortable .th-sort-desc {
+  background: rgba(0, 0, 0, 0.1);
+}

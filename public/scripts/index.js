@@ -26,3 +26,4 @@ function randomPassword(length) {
   
   password.type = "text";
 }
+
