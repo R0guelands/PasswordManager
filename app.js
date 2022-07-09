@@ -220,6 +220,6 @@ app.post('/submit', (req, res) => {
 });
 
 // app.listen OBS: CHANGE THIS TO YOUR PORT AND IP FOR THE SERVER
-app.listen(3000, () => {
+app.listen(3000, '0.0.0.0', () => {
     console.log('Server is running on port 3000');
 });
