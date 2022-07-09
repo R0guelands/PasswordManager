@@ -25,6 +25,7 @@
                 <input type="checkbox" id="toggle-password" />
                 <label for="toggle-password">Show Password</label>
               </div>
+              <input type="hidden" name="date" id="todayDate">
               <button type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
               <a href="/passwords" class="btn btn-danger" style="margin-top:27px">Cancel</a>
               <button type="button" class="btn btn-secondary" onClick="randomPassword(18);" style="margin-top:27px">Generate random</button>
@@ -40,4 +41,8 @@
   </div>
 </div>
 
-<%- include('partials/footer') %>
+<script src="scripts/index.js"></script>
+<script src="scripts/date.js"></script>
+
+</body>
+</html>

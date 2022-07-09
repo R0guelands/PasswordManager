@@ -207,7 +207,7 @@ app.post('/submit', (req, res) => {
         const newPassword = new Password({
             username: user.username,
             login: req.body.login,
-            date_of_creation: new Date(),
+            date_of_creation: req.body.date,
             name: req.body.name,
             password: encrypt(user.password, req.body.password)
         });
