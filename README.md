@@ -1,3 +1,9 @@
+App deployed and running on free Heroku:
+https://r0gue-manager.herokuapp.com/
+
+
+For clonning and setting up on your on:
+
 This project is a simple web-based password manager that allows you to store your passwords in a secure way and acess them using your login.
 
 It uses [passport](https://www.passportjs.org/) to authenticate users and uses the [bcrypt](https://www.npmjs.com/package/bcrypt) module to hash passwords so only the person with the correct master-password can decrypt the hash.
@@ -15,5 +21,4 @@ To install and use it yourself, you can follow this steps:
 7. Open the browser and go to http://< ip >:< port > to login or register.
 8. You can now use the `/passwords` endpoint to manage your passwords.
 
-App deployed and running on free Heroku:
-https://r0gue-manager.herokuapp.com/
+
