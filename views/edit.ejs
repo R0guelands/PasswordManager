@@ -10,7 +10,7 @@
           <h1 class="card-title">Edit password "<%=entry.name%>"</h1>
 
           <div class="text-start space">
-            <form action="/edit/<%=entry.id%>" method="POST">
+            <form name="myform" action="/edit/<%=entry.id%>" method="POST">
               <div class="form-group">
                 <label for="name">Name for the password</label>
                 <input type="text" class="form-control" name="name" value="<%=entry.name%>">
@@ -27,6 +27,7 @@
               </div>
               <button type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
               <a href="/passwords" class="btn btn-danger" style="margin-top:27px">Cancel</a>
+              <button type="button" class="btn btn-secondary" onClick="randomPassword(18);" style="margin-top:27px">Generate random</button>
             </form>
           </div>
 
