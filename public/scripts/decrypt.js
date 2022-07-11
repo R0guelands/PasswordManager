@@ -5,8 +5,7 @@
  
  function decrypt(text) {
 	let key = sessionStorage.passwordLocal;
-	const bytes  = CryptoJS.AES.decrypt(text, key);
-	return bytes.toString(CryptoJS.enc.Utf8);
+	return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
  }
 
  let myTable = document.getElementById("myTable");
@@ -14,8 +13,8 @@
  for (let i = 1; i < myTable.rows.length; i++) {
 	let cell = myTable.rows[i].cells[3];
 	let text = cell.innerHTML;
-	let decrypted = decrypt(text);
-	cell.innerHTML = decrypted;
+	cell.innerHTML = decrypt(text);
+
  }
 
 },{"crypto-js":12}],3:[function(require,module,exports){

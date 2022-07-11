@@ -21,8 +21,8 @@ for (var x = 0; x < 20; x++) {
     pass += chars.charAt(i);
 }
 app.use(sessions({
-    secret: pass,	
-    resave: false,				
+    secret: pass,
+    resave: false,
     saveUninitialized: false
 }));
 app.use(passport.initialize());
@@ -48,7 +48,6 @@ function encrypt(password, key) {
     return ciphertext.toString();
 
 }
-
 
 // Schema for passwords
 const passwordSchema = new mongoose.Schema({
@@ -76,12 +75,12 @@ app.get('/register', (req, res) => {
 
 app.get('/passwords', (req, res) => {
     if (req.isAuthenticated()) {
-        Password.find({"username": req.session.passport.user}, (err, entries) => {
+        Password.find({ "username": req.session.passport.user }, (err, entries) => {
             if (err) {
                 console.log(err);
                 res.redirect('/');
             } else {
-                res.render('passwords', 
+                res.render('passwords',
                     {
                         entries: entries
                     }
@@ -106,7 +105,7 @@ app.get('/logout', (req, res) => {
     req.logout((err) => {
         if (err) {
             console.log(err);
-        }  
+        }
         res.redirect('/');
     });
 });
@@ -119,7 +118,7 @@ app.get('/delete/:id', (req, res) => {
                 res.redirect('/');
             } else {
                 res.redirect('/passwords');
-            }     
+            }
         });
     } else {
         res.redirect('/login');
@@ -145,7 +144,7 @@ app.get('/edit/:id', (req, res) => {
 app.post('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         Password.findByIdAndUpdate(req.params.id, {
-            $set: { 
+            $set: {
                 name: req.body.name,
                 login: req.body.login,
                 password: encrypt(req.body.password, req.body.userPass)
@@ -187,7 +186,7 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
 
-    User.register({ username: req.body.username}, req.body.password, (err, user) => {
+    User.register({ username: req.body.username }, req.body.password, (err, user) => {
         if (err) {
             console.log(err);
             res.redirect('/register');
@@ -216,6 +215,6 @@ app.post('/submit', (req, res) => {
 });
 
 // app.listen OBS: CHANGE THIS TO YOUR PORT AND IP FOR THE SERVER
-app.listen( process.env.PORT || 3000, '0.0.0.0', () => {
+app.listen(process.env.PORT || 3000, '0.0.0.0', () => {
     console.log('Server is running on port 3000');
 });

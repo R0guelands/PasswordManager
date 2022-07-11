@@ -1,6 +1,9 @@
-document.getElementById("toggle-password").addEventListener("click", () => {
-    
-    if (this.checked) {
+const togglePassword = document.getElementById("toggle-password");
+const password = document.getElementById("password");
+
+togglePassword.addEventListener("click", () => {
+
+    if (password.type === "password") {
         password.type = "text";
     } else {
         password.type = "password";
@@ -8,10 +11,10 @@ document.getElementById("toggle-password").addEventListener("click", () => {
 
 });
 
+
 document.getElementById("randomTextGenerator").addEventListener("click", () => {
 
-    const password = document.getElementById("password");
-    let chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+<>ABCDEFGHIJKLMNOP1234567890";
+    let chars = "abcdefghijklmnopqrstuvwxyz!@#$%^&*()-+ABCDEFGHIJKLMNOP1234567890";
     let pass = "";
 
     for (let x = 0; x < 18; x++) {
@@ -23,7 +26,7 @@ document.getElementById("randomTextGenerator").addEventListener("click", () => {
         togglePassword.checked = !togglePassword.checked;
     }
 
-    document.getElementById('password').value = pass;
+    password.value = pass;
     password.type = "text";
 
 });
@@ -34,5 +37,6 @@ document.getElementById("submit").addEventListener("click", () => {
 
 });
 
-var today = new Date();
-document.getElementById("todayDate").value = today;
+if (document.getElementById("date")) {
+    document.getElementById("date").value = new Date().toLocaleDateString();
+}
