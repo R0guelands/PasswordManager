@@ -48,8 +48,6 @@ if (document.getElementById("loginPage")) {
         sessionStorage.passwordLocal = userPassword;
     });
 
-
-
     togglePassword.addEventListener("click", () => {
 
         if (password.type === "password") {

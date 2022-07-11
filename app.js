@@ -191,7 +191,9 @@ app.post('/register', (req, res) => {
             console.log(err);
             res.redirect('/register');
         } else {
-            res.redirect('/login');
+            passport.authenticate('local', { failureRedirect: '/register' })(req, res, () => {
+                res.redirect('/passwords');
+            });
         }
     });
 
