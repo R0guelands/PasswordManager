@@ -38,5 +38,15 @@ document.getElementById("submit").addEventListener("click", () => {
 });
 
 if (document.getElementById("date")) {
-    document.getElementById("date").value = new Date().toLocaleDateString();
+    const options = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZoneName: 'long'
+
+    };
+    document.getElementById("date").value = new Date().toLocaleDateString("pt-BR", options);
 }

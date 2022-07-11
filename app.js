@@ -52,9 +52,9 @@ function encrypt(password, key) {
 // Schema for passwords
 const passwordSchema = new mongoose.Schema({
     username: String,
-    login: String,
     date_of_creation: String,
     name: String,
+    login: String,
     password: String
 });
 
