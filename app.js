@@ -145,8 +145,8 @@ app.post('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         Password.findByIdAndUpdate(req.params.id, {
             $set: {
-                name: req.body.name,
-                login: req.body.login,
+                name: encrypt(req.body.name, req.body.userPass),
+                login: encrypt(req.body.login, req.body.userPass),
                 password: encrypt(req.body.password, req.body.userPass)
             }
         }, (err) => {
@@ -201,9 +201,9 @@ app.post('/submit', (req, res) => {
     if (req.isAuthenticated()) {
         const newPassword = new Password({
             username: req.session.passport.user,
-            login: req.body.login,
+            login: encrypt(req.body.login, req.body.userPass),
             date_of_creation: req.body.date,
-            name: req.body.name,
+            name: encrypt(req.body.name, req.body.userPass),
             password: encrypt(req.body.password, req.body.userPass)
         });
         newPassword.save();

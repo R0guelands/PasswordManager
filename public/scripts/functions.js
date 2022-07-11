@@ -11,6 +11,15 @@ togglePassword.addEventListener("click", () => {
 
 });
 
+if (document.getElementById("title")) {
+
+    password.type = "text";
+    if (togglePassword.checked == false) {
+        togglePassword.checked = !togglePassword.checked;
+    }
+
+}
+
 
 document.getElementById("randomTextGenerator").addEventListener("click", () => {
 

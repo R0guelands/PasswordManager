@@ -7,15 +7,34 @@
 	let key = sessionStorage.passwordLocal;
 	return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
  }
+ 
+ if (document.getElementById('myTable')) {
+	let myTable = document.getElementById("myTable");
 
- let myTable = document.getElementById("myTable");
+	for (let i = 1; i < myTable.rows.length; i++) {
+	   let cell1 = myTable.rows[i].cells[1];
+	   let cell2 = myTable.rows[i].cells[2];
+	   let cell3 = myTable.rows[i].cells[3];
+	   let text1 = cell1.innerHTML;
+	   let text2 = cell2.innerHTML;
+	   let text3 = cell3.innerHTML;
+	   cell1.innerHTML = decrypt(text1);
+	   cell2.innerHTML = decrypt(text2);
+	   cell3.innerHTML = decrypt(text3);
+	}
 
- for (let i = 1; i < myTable.rows.length; i++) {
-	let cell = myTable.rows[i].cells[3];
-	let text = cell.innerHTML;
-	cell.innerHTML = decrypt(text);
+ } else {
+
+	let name = document.getElementById("name");
+	let login = document.getElementById("login");
+	let password = document.getElementById("password");
+	
+	name.value = decrypt(name.value);
+	login.value = decrypt(login.value);
+	password.value = decrypt(password.value);
 
  }
+
 
 },{"crypto-js":12}],3:[function(require,module,exports){
 ;(function (root, factory, undef) {

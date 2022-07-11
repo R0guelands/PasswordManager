@@ -7,23 +7,23 @@
       <div class="card box">
         <div class="card-body">
           <i class="fas fa-key fa-6x"></i>
-          <h1 class="card-title">Edit password "<%=entry.name%>"</h1>
+          <h1 id="title" class="card-title">Edit password</h1>
 
           <div class="text-start space">
             <form name="myform" action="/edit/<%=entry.id%>" method="POST">
               <div class="form-group">
                 <label for="name">Name for the password</label>
-                <input type="text" class="form-control" name="name" value="<%=entry.name%>">
+                <input id="name" type="text" class="form-control" name="name" value="<%=entry.name%>">
               </div>
               <div class="form-group space">
                 <label for="login">Username</label>
-                <input type="text" class="form-control" name="login" value="<%=entry.login%>">
+                <input id="login" type="text" class="form-control" name="login" value="<%=entry.login%>">
               </div>
               <div class="form-group space">
                 <label for="password">Password</label>
-                <input id="password" type="password" class="form-control" name="password" required>
+                <input id="password" type="password" class="form-control" name="password" value="<%=entry.password%>" required>
                 <input type="hidden" name="userPass" id="userPass">
-                <input type="checkbox" id="toggle-password" />
+                <input type="checkbox" id="toggle-password" class="checkboxSpacing">
                 <label for="toggle-password">Show Password</label>
               </div>
               <button id="submit" type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
@@ -41,6 +41,7 @@
 </div>
 
 <script src="/scripts/functions.js"></script>
+<script src="/scripts/decrypt.js"></script>
 
 </body>
 </html>
