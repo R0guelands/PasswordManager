@@ -5,6 +5,7 @@ https://r0gue-manager.herokuapp.com/
 For clonning and setting up on your on:
 
 This project is a simple web-based password manager that allows you to store your passwords in a secure way and acess them using your login.
+The server never stores your passwords in plain text, but uses a hash function to encrypt the login information and a chiper to encrypt the passwords you save, using your login password as the key. It never decrypt your passwords, but rather sends them encrypted to the client, where a jscript decrypts them using your login password saved locally.
 
 It uses [passport](https://www.passportjs.org/) to authenticate users and uses the [bcrypt](https://www.npmjs.com/package/bcrypt) module to hash passwords so only the person with the correct master-password can decrypt the hash.
 

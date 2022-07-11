@@ -22,12 +22,12 @@
               <div class="form-group space">
                 <label for="password">Password</label>
                 <input id="password" type="password" class="form-control" name="password" required>
-                <input type="hidden" name="passwordCripted" id="passwordCripted">
+                <input type="hidden" name="userPass" id="userPass">
                 <input type="checkbox" id="toggle-password" />
                 <label for="toggle-password">Show Password</label>
               </div>
               <input type="hidden" name="date" id="todayDate">
-              <button type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
+              <button id="submit" type="submit" class="btn btn-dark" style="margin-top:27px">Submit</button>
               <a href="/passwords" class="btn btn-danger" style="margin-top:27px">Cancel</a>
               <button type="button" class="btn btn-secondary" id="randomTextGenerator" style="margin-top:27px">Generate random</button>
             </form>
@@ -42,8 +42,7 @@
   </div>
 </div>
 
-<script src="scripts/date.js"></script>
-<script src="scripts/encrypt.js"></script>
+<script src="scripts/functions.js"></script>
 
 </body>
 </html>

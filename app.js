@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const sessions = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
+const CryptoJS = require('crypto-js');
 
 // Configuring the app
 app.use(express.static(__dirname + '/public/'));
@@ -40,6 +41,14 @@ passport.use(User.createStrategy());
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+function encrypt(password, key) {
+
+    let ciphertext = CryptoJS.AES.encrypt(password, key);
+    return ciphertext.toString();
+
+}
+
 
 // Schema for passwords
 const passwordSchema = new mongoose.Schema({
@@ -139,7 +148,7 @@ app.post('/edit/:id', (req, res) => {
             $set: { 
                 name: req.body.name,
                 login: req.body.login,
-                password: req.body.passwordCripted
+                password: encrypt(req.body.password, req.body.userPass)
             }
         }, (err) => {
             if (err) {
@@ -196,7 +205,7 @@ app.post('/submit', (req, res) => {
             login: req.body.login,
             date_of_creation: req.body.date,
             name: req.body.name,
-            password: req.body.passwordCripted
+            password: encrypt(req.body.password, req.body.userPass)
         });
         newPassword.save();
         res.redirect('/passwords');
