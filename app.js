@@ -141,6 +141,57 @@ app.get('/edit/:id', (req, res) => {
     }
 });
 
+app.get('/options', (req, res) => {
+    if (req.isAuthenticated()) {
+        User.find({ "username": req.session.passport.user }, (err, entries) => {    
+            if (err) {
+                console.log(err);
+                res.redirect('/');
+            } else {
+                res.render('options',
+                    { 
+                        entry: entries[0]
+                    }
+                );
+            }
+        });
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/options/confirm', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('confirm');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.get('/options/delete', (req, res) => {
+
+    if (req.isAuthenticated()) {
+        Password.deleteMany({ "username": req.session.passport.user }, (err) => {
+            if (err) {
+                console.log(err);
+                res.redirect('/');
+            } else {
+                User.deleteOne({ "username": req.session.passport.user }, (err) => {
+                    if (err) {
+                        console.log(err);
+                        res.redirect('/');
+                    } else {
+                        res.redirect('/logout');
+                    }
+                });
+            }
+        });
+    } else {
+        res.redirect('/login');
+    }
+
+});
+
 app.post('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
         Password.findByIdAndUpdate(req.params.id, {
@@ -210,6 +261,77 @@ app.post('/submit', (req, res) => {
         });
         newPassword.save();
         res.redirect('/passwords');
+    } else {
+        res.redirect('/login');
+    }
+
+});
+
+
+app.post('/options/userChange', (req, res) => {
+
+    if (req.isAuthenticated()) {
+        User.find({ "username": req.body.username }, (err, entries) => {
+            if (err) {
+                console.log(err);
+                res.redirect('/passwords');
+            } else {
+                if (entries.length === 0) {
+                    User.updateOne({ "username": req.session.passport.user }, { $set: { "username": req.body.username } }, (err) => {
+                        if (err) {
+                            console.log(err);
+                            res.redirect('/');
+                        } else {
+                            Password.updateMany({ "username": req.session.passport.user }, { $set: { "username": req.body.username } }, (err) => {
+                                if (err) {
+                                    console.log(err);
+                                    res.redirect('/');
+                                } else {
+                                    res.redirect('/logout');
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    res.redirect('/options');
+                }
+            }
+        });
+    } else {
+        res.redirect('/login');
+    }
+
+});
+
+app.post('/options/passwordChange', (req, res) => {
+
+    if (req.isAuthenticated()) {
+        
+        User.deleteOne({ "username": req.session.passport.user }, (err) => {
+            
+            if (err) {
+                console.log(err);
+                res.redirect('/');
+            } else {
+                User.register({ username: req.session.passport.user }, req.body.password, (err, user) => {
+                    if (err) {
+                        console.log(err);
+                        res.redirect('/');
+                    } else {
+                        Password.deleteMany({ "username": req.session.passport.user }, (err) => {
+
+                            if (err) {
+                                console.log(err);
+                                res.redirect('/');
+                            } else {
+                                res.redirect('/logout');
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
     } else {
         res.redirect('/login');
     }

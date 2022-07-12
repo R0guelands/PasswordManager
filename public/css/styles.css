@@ -18,6 +18,10 @@ body {
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
+.boxx {
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.23);
+}
+
 @media screen and (max-width: 540px) {
   table {
     display: block;
@@ -64,3 +68,29 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.icon-container i:nth-child(2) {
+  display: none; 
+}
+
+.icon-container:hover i:nth-child(1) {
+  display: none;
+}
+
+.icon-container:hover i:nth-child(2) {
+  display: block;
+}
+
+.icon-container {
+  transition: none!important;
+  cursor: pointer;
+}
+
+.icon-container:hover {
+  border-color: #E8ECEF;
+}
+
+i {
+  font-size: 2.5rem;
+}
+
