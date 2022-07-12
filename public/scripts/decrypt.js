@@ -21,6 +21,17 @@
 	   cell1.innerHTML = decrypt(text1);
 	   cell2.innerHTML = decrypt(text2);
 	   cell3.innerHTML = decrypt(text3);
+	   
+	   cell2.addEventListener('click', () => {
+		navigator.clipboard.writeText(cell2.innerHTML);
+		alert("Copied to clipboard");	
+	   });
+
+	   cell3.addEventListener('click', () => {
+		navigator.clipboard.writeText(cell3.innerHTML);
+		alert("Copied to clipboard");	
+	   });
+
 	}
 
  } else {

@@ -93,3 +93,11 @@ i {
   font-size: 2.5rem;
 }
 
+.clickToCopy {
+  cursor: pointer;
+}
+
+.clickToCopy:hover {
+  text-decoration: underline;
+}
+
