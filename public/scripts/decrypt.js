@@ -24,12 +24,10 @@
 	   
 	   cell2.addEventListener('click', () => {
 		navigator.clipboard.writeText(cell2.innerHTML);
-		alert("Copied to clipboard");	
 	   });
 
 	   cell3.addEventListener('click', () => {
 		navigator.clipboard.writeText(cell3.innerHTML);
-		alert("Copied to clipboard");	
 	   });
 
 	}
