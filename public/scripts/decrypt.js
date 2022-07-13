@@ -7,6 +7,10 @@
 	let key = sessionStorage.passwordLocal;
 	return CryptoJS.AES.decrypt(text, key).toString(CryptoJS.enc.Utf8);
  }
+
+ function delay(time) {
+	return new Promise(resolve => setTimeout(resolve, time));
+ }
  
  if (document.getElementById('myTable')) {
 	let myTable = document.getElementById("myTable");
@@ -23,11 +27,25 @@
 	   cell3.innerHTML = decrypt(text3);
 	   
 	   cell2.addEventListener('click', () => {
-		navigator.clipboard.writeText(cell2.innerHTML);
+			navigator.clipboard.writeText(cell2.innerHTML);
+			const copyToClipboard = document.getElementById('copyToClipboard');
+			copyToClipboard.textContent = "Copied to Clipboard";
+			copyToClipboard.style.color = "red";
+			delay(1500).then(() => {
+				copyToClipboard.textContent = "";
+				copyToClipboard.style.color = "";
+			});
 	   });
 
 	   cell3.addEventListener('click', () => {
-		navigator.clipboard.writeText(cell3.innerHTML);
+			navigator.clipboard.writeText(cell3.innerHTML);
+			const copyToClipboard = document.getElementById('copyToClipboard');
+			copyToClipboard.textContent = "Copied to Clipboard";
+			copyToClipboard.style.color = "red";
+			delay(1500).then(() => {
+				copyToClipboard.textContent = "";
+				copyToClipboard.style.color = "";
+			});
 	   });
 
 	}

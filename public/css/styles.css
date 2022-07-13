@@ -101,3 +101,8 @@ i {
   text-decoration: underline;
 }
 
+span {
+  font-size: 1.3rem;
+  margin-left: -201px;
+}
+
