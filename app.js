@@ -194,7 +194,7 @@ app.get('/options/delete', (req, res) => {
 
 app.post('/edit/:id', (req, res) => {
     if (req.isAuthenticated()) {
-        Password.findByIdAndUpdate(req.params.id, {
+        Password.updateOne({"_id": req.params.id, "username": req.session.passport.user}, {
             $set: {
                 name: encrypt(req.body.name, req.body.userPass),
                 login: encrypt(req.body.login, req.body.userPass),
