@@ -25,28 +25,6 @@
 	   cell1.innerHTML = decrypt(text1);
 	   cell2.innerHTML = decrypt(text2);
 	   cell3.innerHTML = decrypt(text3);
-	   
-	   cell2.addEventListener('click', () => {
-			navigator.clipboard.writeText(cell2.innerHTML);
-			const copyToClipboard = document.getElementById('copyToClipboard');
-			copyToClipboard.textContent = "Copied to Clipboard";
-			copyToClipboard.style.color = "red";
-			delay(1500).then(() => {
-				copyToClipboard.textContent = "";
-				copyToClipboard.style.color = "";
-			});
-	   });
-
-	   cell3.addEventListener('click', () => {
-			navigator.clipboard.writeText(cell3.innerHTML);
-			const copyToClipboard = document.getElementById('copyToClipboard');
-			copyToClipboard.textContent = "Copied to Clipboard";
-			copyToClipboard.style.color = "red";
-			delay(1500).then(() => {
-				copyToClipboard.textContent = "";
-				copyToClipboard.style.color = "";
-			});
-	   });
 
 	}
 
