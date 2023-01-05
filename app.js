@@ -28,6 +28,7 @@ app.use(sessions({
 app.use(passport.initialize());
 app.use(passport.session());
 
+mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGODB_URI); // Connecting to the database
 
 // Creating the schema for the login and registration used by passport 
